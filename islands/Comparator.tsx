@@ -5,6 +5,8 @@ import { Header } from "../components/Header.tsx";
 import { Category } from "../components/Category.tsx";
 import { soarxs } from "../wings/soarxs.ts";
 import { hook522 } from "../wings/hook522.ts";
+import { lynx2s } from "../wings/lynx2s.ts";
+import { artik522 } from "../wings/artik522.ts";
 
 export default function Comparator() {
   const showIfNoDiff = useSignal(false);

@@ -40,7 +40,7 @@ export const categories = [
   },
   { // 6. acceleratedControls
     key: "c06",
-    label: "Pitch stability operating controls during accelerated A flight",
+    label: "Pitch stability operating controls during accelerated flight",
     testLabels: ["Collapse occurs"],
   },
   { // 7. roll

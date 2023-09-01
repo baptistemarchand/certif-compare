@@ -52,9 +52,9 @@ export const hook522 = {
         "A",
       ],
       [
-        "Spontaneous exit (g force A decreasing, rate of turn decreasing)",
+        "Spontaneous exit",
         "A",
-        "Spontaneous exit (g force A decreasing, rate of turn decreasing)",
+        "Spontaneous exit",
         "A",
       ],
       [
