@@ -15,7 +15,16 @@ export const Category = (
   const categoryDiff = wings.some((wing) =>
     wing[categoryKey].result !== wings[0][categoryKey].result
   );
-  if (!categoryDiff && !showIfNoDiff.value) {
+  if (
+    !showIfNoDiff.value && !categoryDiff && testLabels.every((testLabel, i) => {
+      const results = wings.map((wing) =>
+        wing[categoryKey].tests[i] as TestResult
+      );
+      return results.every((result) =>
+        result[1] === results[0][1] && result[3] === results[0][3]
+      );
+    })
+  ) {
     return null;
   }
   return (
