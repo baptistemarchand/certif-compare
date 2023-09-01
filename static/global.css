@@ -1,0 +1,2 @@
+.deleteBadge{ display:none; }
+.gliderBox:hover .deleteBadge{ display:block; }

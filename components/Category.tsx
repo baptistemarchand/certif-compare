@@ -1,15 +1,15 @@
 import type { Signal } from "@preact/signals";
 import { CategoryKey } from "../categories.ts";
-import { wings } from "../wings/index.ts";
 import { Grade } from "./Grade.tsx";
 import { Test, TestResult } from "./Test.tsx";
 
 export const Category = (
-  { categoryKey, label, testLabels, showIfNoDiff }: {
+  { categoryKey, label, testLabels, showIfNoDiff, wings }: {
     categoryKey: CategoryKey;
     label: string;
     testLabels: readonly string[];
     showIfNoDiff: Signal<boolean>;
+    wings: any[];
   },
 ) => {
   const categoryDiff = wings.some((wing) =>

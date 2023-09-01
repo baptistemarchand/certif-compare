@@ -22,11 +22,11 @@ export const Grade = (
     return "";
   })();
   return (
-    <p
+    <div
       class={`mx-2 my-1 px-3 py-1 w-32 ${color} rounded border border-black`}
     >
       {showGrade && <p class="font-medium">{grade}</p>}
       <p class="text-xs">{comment}</p>
-    </p>
+    </div>
   );
 };

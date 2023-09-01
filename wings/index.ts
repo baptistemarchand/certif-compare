@@ -3,9 +3,9 @@ import { hook522 } from "./hook522.ts";
 import { lynx2s } from "./lynx2s.ts";
 import { soarxs } from "./soarxs.ts";
 
-export const wings = [
+export const allWings = [
   hook522,
-  // artik522,
+  artik522,
   soarxs,
-  // lynx2s,
+  lynx2s,
 ];
