@@ -3,7 +3,7 @@ from pprint import pprint
 
 # from py_pdf_parser.visualise import visualise
 
-document = load_file("soarxs.pdf")
+document = load_file("pdf/hook522.pdf")
 # visualise(document)
 
 

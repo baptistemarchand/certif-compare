@@ -1,4 +1,4 @@
-export const soarxs = {
+export const hook522 = {
   "c01": {
     "result": "A",
     "tests": [[
@@ -20,16 +20,12 @@ export const soarxs = {
   },
   "c04": {
     "result": "A",
-    "tests": [
-      [
-        "Increasing / greater than 55 cm",
-        "A",
-        "Increasing / greater than 55 cm",
-        "A",
-      ],
-      ["not available", "0", "not available", "0"],
-      ["not available", "0", "not available", "0"],
-    ],
+    "tests": [["Increasing / greater than 55 cm", "A", "not available", "0"], [
+      "not available",
+      "0",
+      "Increasing / greater than 60 cm",
+      "A",
+    ], ["not available", "0", "not available", "0"]],
   },
   "c05": {
     "result": "A",
@@ -47,7 +43,7 @@ export const soarxs = {
     "tests": [["Spontaneous exit", "A", "Spontaneous exit", "A"]],
   },
   "c09": {
-    "result": "A",
+    "result": "B",
     "tests": [
       [
         "Immediate reduction of rate of turn",
@@ -62,31 +58,27 @@ export const soarxs = {
         "A",
       ],
       [
-        "Less than 720°, spontaneous A recovery",
-        "A",
-        "Less than 720°, spontaneous A recovery",
+        "720° to 1 080°, spontaneous recovery",
+        "B",
+        "Less than 720°, spontaneous ecovery",
         "A",
       ],
     ],
   },
   "c10": {
-    "result": "B",
+    "result": "A",
     "tests": [
       ["Rocking back less than 45°", "A", "Rocking back less than 45°", "A"],
-      ["Spontaneous in 3 s to 5 s", "B", "Spontaneous in less than 3 s", "A"],
       [
-        "Dive forward 0° to 30° Keeping course",
+        "Spontaneous in less than 3 s",
         "A",
-        "Dive forward 0° to 30° Keeping course",
+        "Spontaneous in less than 3 s",
         "A",
       ],
-      ["No", "A", "No", "A"],
-      ["Rocking back less than 45°", "A", "Rocking back less than 45°", "A"],
-      ["Spontaneous in 3 s to 5 s", "B", "Spontaneous in less than 3 s", "A"],
       [
-        "Dive forward 0° to 30° / Keeping course",
+        "Dive forward 0° to 30° Keeping course",
         "A",
-        "Dive forward 0° to 30° / Keeping course",
+        "Dive forward 0° to 30° Keeping course",
         "A",
       ],
       ["No", "A", "No", "A"],
@@ -98,9 +90,23 @@ export const soarxs = {
         "A",
       ],
       [
-        "Dive forward 0° to 30° / Keeping course",
+        "Dive forward 0° to 30° Keeping course",
         "A",
-        "Dive forward 0° to 30° / Keeping course",
+        "Dive forward 0° to 30° Keeping course",
+        "A",
+      ],
+      ["No", "A", "No", "A"],
+      ["Rocking back less than 45°", "A", "Rocking back less than 45°", "A"],
+      [
+        "Spontaneous in less than 3 s",
+        "A",
+        "Spontaneous in less than 3 s",
+        "A",
+      ],
+      [
+        "Dive forward 0° to 30° Keeping course",
+        "A",
+        "Dive forward 0° to 30° Keeping course",
         "A",
       ],
       ["No", "A", "No", "A"],
@@ -146,12 +152,12 @@ export const soarxs = {
     ],
   },
   "c14": {
-    "result": "B",
+    "result": "A",
     "tests": [
       [
         "Less than 90° / Dive or roll angle 0° to 15°",
         "A",
-        "Less than 90° / Dive or roll angle 0° to 15°",
+        "Less than 90° / Dive or roll angle A 0° to 15°",
         "A",
       ],
       ["Spontaneous re-inflation", "A", "Spontaneous re-inflation", "A"],
@@ -165,25 +171,9 @@ export const soarxs = {
       ["No", "A", "No", "A"],
       ["No", "A", "No", "A"],
       [
-        "90° to 180° / Dive or roll angle 15° to 45°",
-        "B",
-        "90° to 180° / Dive or roll angle 15° to 45°",
-        "B",
-      ],
-      ["Spontaneous re-inflation", "A", "Spontaneous re-inflation", "A"],
-      ["Less than 360°", "A", "Less than 360°", "A"],
-      [
-        "No (or only a small number of collapsed cells with a spontaneous reinflation)",
+        "Less than 90° / Dive or roll angle 15° to 45°",
         "A",
-        "No (or only a small number of collapsed cells with a spontaneous reinflation)",
-        "A",
-      ],
-      ["No", "A", "No", "A"],
-      ["No", "A", "No", "A"],
-      [
-        "Less than 90° / Dive or roll angle 0° to 15°",
-        "A",
-        "Less than 90° / Dive or roll angle 0° to 15°",
+        "Less than 90° / Dive or roll angle 15° to 45°",
         "A",
       ],
       ["Spontaneous re-inflation", "A", "Spontaneous re-inflation", "A"],
@@ -199,8 +189,24 @@ export const soarxs = {
       [
         "Less than 90° / Dive or roll angle 0° to 15°",
         "A",
-        "90° to 180° / Dive or roll angle B 15° to 45°",
-        "B",
+        "Less than 90° / Dive or roll angle 0° to 15°",
+        "A",
+      ],
+      ["Spontaneous re-inflation", "A", "Spontaneous re-inflation", "A"],
+      ["Less than 360°", "A", "Less than 360°", "A"],
+      [
+        "No (or only a small number of collapsed cells with a spontaneous reinflation)",
+        "A",
+        "No (or only a small number of collapsed cells with a spontaneous reinflation)",
+        "A",
+      ],
+      ["No", "A", "No", "A"],
+      ["No", "A", "No", "A"],
+      [
+        "Less than 90° / Dive or roll angle 15° to 45°",
+        "A",
+        "Less than 90° / Dive or roll angle 15° to 45°",
+        "A",
       ],
       ["Spontaneous re-inflation", "A", "Spontaneous re-inflation", "A"],
       ["Less than 360°", "A", "Less than 360°", "A"],
@@ -226,12 +232,12 @@ export const soarxs = {
   "c16": { "result": "A", "tests": [["No", "A", "No", "A"]] },
   "c17": { "result": "A", "tests": [["No", "A", "No", "A"]] },
   "c18": {
-    "result": "B",
+    "result": "A",
     "tests": [[
       "Stops spinning in less than 90°",
       "A",
-      "Stops spinning in 90° to 180°",
-      "B",
+      "Stops spinning in less than 90°",
+      "A",
     ], ["No", "A", "No", "A"]],
   },
   "c19": {
@@ -274,15 +280,15 @@ export const soarxs = {
     ],
   },
   "c21": {
-    "result": "A",
+    "result": "B",
     "tests": [
       ["Dedicated controls", "A", "Dedicated controls", "A"],
       ["Stable flight", "A", "Stable flight", "A"],
       [
         "Spontaneous in less than 3 s",
         "A",
-        "Spontaneous in less than 3 s",
-        "A",
+        "Recovery through pilot action in B less than a further 3 s",
+        "B",
       ],
       ["Dive forward 0° to 30°", "A", "Dive forward 0° to 30°", "A"],
       ["Stable flight", "A", "Stable flight", "A"],
@@ -303,5 +309,5 @@ export const soarxs = {
   },
   "classification": "B",
   "folding_lines_used": "no",
-  "glider_model": "Soar XS",
+  "glider_model": "Hook 5 22",
 };
