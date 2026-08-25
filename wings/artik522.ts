@@ -1,22 +1,29 @@
 export const artik522 = {
   "c01": {
     "result": "B",
-    "tests": [[
-      "Easy rising, some pilot correction is required",
-      "B",
-      "Easy rising, some pilot correction is required",
-      "B",
-    ], ["No", "A", "No", "A"]],
+    "tests": [
+      [
+        "Easy rising, some pilot correction is required",
+        "B",
+        "Easy rising, some pilot correction is required",
+        "B",
+      ],
+      ["No", "A", "No", "A"],
+    ],
   },
-  "c02": { "result": "A", "tests": [["No", "A", "No", "A"]] },
+  "c02": {
+    "result": "A",
+    "tests": [
+      ["No", "A", "No", "A"],
+    ],
+  },
   "c03": {
     "result": "B",
-    "tests": [["Yes", "A", "Yes", "A"], ["Yes", "A", "Yes", "A"], [
-      "Less than 25 km/h",
-      "A",
-      "25 km/h to 30 km/h",
-      "B",
-    ]],
+    "tests": [
+      ["Yes", "A", "Yes", "A"],
+      ["Yes", "A", "Yes", "A"],
+      ["Less than 25 km/h", "A", "25 km/h to 30 km/h", "B"],
+    ],
   },
   "c04": {
     "result": "C",
@@ -28,18 +35,28 @@ export const artik522 = {
   },
   "c05": {
     "result": "A",
-    "tests": [[
-      "Dive forward less than 30°",
-      "A",
-      "Dive forward less than 30°",
-      "A",
-    ], ["No", "A", "No", "A"]],
+    "tests": [
+      ["Dive forward less than 30°", "A", "Dive forward less than 30°", "A"],
+      ["No", "A", "No", "A"],
+    ],
   },
-  "c06": { "result": "A", "tests": [["No", "A", "No", "A"]] },
-  "c07": { "result": "A", "tests": [["Reducing", "A", "Reducing", "A"]] },
+  "c06": {
+    "result": "A",
+    "tests": [
+      ["No", "A", "No", "A"],
+    ],
+  },
+  "c07": {
+    "result": "A",
+    "tests": [
+      ["Reducing", "A", "Reducing", "A"],
+    ],
+  },
   "c08": {
     "result": "A",
-    "tests": [["Spontaneous exit", "A", "Spontaneous exit", "A"]],
+    "tests": [
+      ["Spontaneous exit", "A", "Spontaneous exit", "A"],
+    ],
   },
   "c09": {
     "result": "B",
@@ -50,7 +67,12 @@ export const artik522 = {
         "Immediate reduction of rate of turn",
         "A",
       ],
-      ["Spontaneous exit", "A", "Spontaneous exit", "A"],
+      [
+        "Spontaneous exit (g force decreasing, rate of turn decreasing)",
+        "A",
+        "Spontaneous exit (g force decreasing, rate of turn decreasing)",
+        "A",
+      ],
       [
         "720° to 1 080°, spontaneous recovery",
         "B",
@@ -113,12 +135,15 @@ export const artik522 = {
   },
   "c12": {
     "result": "A",
-    "tests": [[
-      "Spontaneous in less than 3 s",
-      "A",
-      "Spontaneous in less than 3 s",
-      "A",
-    ], ["No", "A", "No", "A"]],
+    "tests": [
+      [
+        "Spontaneous in less than 3 s",
+        "A",
+        "Spontaneous in less than 3 s",
+        "A",
+      ],
+      ["No", "A", "No", "A"],
+    ],
   },
   "c13": {
     "result": "A",
@@ -206,23 +231,40 @@ export const artik522 = {
   },
   "c15": {
     "result": "A",
-    "tests": [["Yes", "A", "Yes", "A"], ["Yes", "A", "Yes", "A"], [
-      "More than 50 % of the symmetric control travel",
-      "A",
-      "More than 50 % of the symmetric control travel",
-      "A",
-    ]],
+    "tests": [
+      ["Yes", "A", "Yes", "A"],
+      ["Yes", "A", "Yes", "A"],
+      [
+        "More than 50 % of the symmetric control travel",
+        "A",
+        "More than 50 % of the symmetric control travel",
+        "A",
+      ],
+    ],
   },
-  "c16": { "result": "A", "tests": [["No", "A", "No", "A"]] },
-  "c17": { "result": "A", "tests": [["No", "A", "No", "A"]] },
+  "c16": {
+    "result": "A",
+    "tests": [
+      ["No", "A", "No", "A"],
+    ],
+  },
+  "c17": {
+    "result": "A",
+    "tests": [
+      ["No", "A", "No", "A"],
+    ],
+  },
   "c18": {
     "result": "B",
-    "tests": [[
-      "Stops spinning in less than 90°",
-      "A",
-      "Stops spinning in 90° to 180°",
-      "B",
-    ], ["No", "A", "No", "A"]],
+    "tests": [
+      [
+        "Stops spinning in less than 90°",
+        "A",
+        "Stops spinning in 90° to 180°",
+        "B",
+      ],
+      ["No", "A", "No", "A"],
+    ],
   },
   "c19": {
     "result": "A",
@@ -275,16 +317,18 @@ export const artik522 = {
   },
   "c22": {
     "result": "A",
-    "tests": [["Yes", "A", "Yes", "A"], ["No", "A", "No", "A"]],
+    "tests": [
+      ["Yes", "A", "Yes", "A"],
+      ["No", "A", "No", "A"],
+    ],
   },
   "c23": {
     "result": "0",
-    "tests": [["not available", "0", "not available", "0"], [
-      "not available",
-      "0",
-      "not available",
-      "0",
-    ], ["not available", "0", "not available", "0"]],
+    "tests": [
+      ["not available", "0", "not available", "0"],
+      ["not available", "0", "not available", "0"],
+      ["not available", "0", "not available", "0"],
+    ],
   },
   "classification": "C",
   "folding_lines_used": "no",

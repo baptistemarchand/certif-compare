@@ -1,46 +1,62 @@
 export const hook522 = {
   "c01": {
     "result": "A",
-    "tests": [[
-      "Smooth, easy and constant rising",
-      "A",
-      "Smooth, easy and constant rising",
-      "A",
-    ], ["No", "A", "No", "A"]],
+    "tests": [
+      [
+        "Smooth, easy and constant rising",
+        "A",
+        "Smooth, easy and constant rising",
+        "A",
+      ],
+      ["No", "A", "No", "A"],
+    ],
   },
-  "c02": { "result": "A", "tests": [["No", "A", "No", "A"]] },
+  "c02": {
+    "result": "A",
+    "tests": [
+      ["No", "A", "No", "A"],
+    ],
+  },
   "c03": {
     "result": "A",
-    "tests": [["Yes", "A", "Yes", "A"], ["Yes", "A", "Yes", "A"], [
-      "Less than 25 km/h",
-      "A",
-      "Less than 25 km/h",
-      "A",
-    ]],
+    "tests": [
+      ["Yes", "A", "Yes", "A"],
+      ["Yes", "A", "Yes", "A"],
+      ["Less than 25 km/h", "A", "Less than 25 km/h", "A"],
+    ],
   },
   "c04": {
     "result": "A",
-    "tests": [["Increasing / greater than 55 cm", "A", "not available", "0"], [
-      "not available",
-      "0",
-      "Increasing / greater than 60 cm",
-      "A",
-    ], ["not available", "0", "not available", "0"]],
+    "tests": [
+      ["Increasing / greater than 55 cm", "A", "not available", "0"],
+      ["not available", "0", "Increasing / greater than 60 cm", "A"],
+      ["not available", "0", "not available", "0"],
+    ],
   },
   "c05": {
     "result": "A",
-    "tests": [[
-      "Dive forward less than 30°",
-      "A",
-      "Dive forward less than 30°",
-      "A",
-    ], ["No", "A", "No", "A"]],
+    "tests": [
+      ["Dive forward less than 30°", "A", "Dive forward less than 30°", "A"],
+      ["No", "A", "No", "A"],
+    ],
   },
-  "c06": { "result": "A", "tests": [["No", "A", "No", "A"]] },
-  "c07": { "result": "A", "tests": [["Reducing", "A", "Reducing", "A"]] },
+  "c06": {
+    "result": "A",
+    "tests": [
+      ["No", "A", "No", "A"],
+    ],
+  },
+  "c07": {
+    "result": "A",
+    "tests": [
+      ["Reducing", "A", "Reducing", "A"],
+    ],
+  },
   "c08": {
     "result": "A",
-    "tests": [["Spontaneous exit", "A", "Spontaneous exit", "A"]],
+    "tests": [
+      ["Spontaneous exit", "A", "Spontaneous exit", "A"],
+    ],
   },
   "c09": {
     "result": "B",
@@ -52,15 +68,15 @@ export const hook522 = {
         "A",
       ],
       [
-        "Spontaneous exit",
+        "Spontaneous exit (g force decreasing, rate of turn decreasing)",
         "A",
-        "Spontaneous exit",
+        "Spontaneous exit (g force decreasing, rate of turn decreasing)",
         "A",
       ],
       [
         "720° to 1 080°, spontaneous recovery",
         "B",
-        "Less than 720°, spontaneous ecovery",
+        "Less than 720°, spontaneous recovery",
         "A",
       ],
     ],
@@ -90,9 +106,9 @@ export const hook522 = {
         "A",
       ],
       [
-        "Dive forward 0° to 30° Keeping course",
+        "Dive forward 0° to 30° / Keeping course",
         "A",
-        "Dive forward 0° to 30° Keeping course",
+        "Dive forward 0° to 30° / Keeping course",
         "A",
       ],
       ["No", "A", "No", "A"],
@@ -104,9 +120,9 @@ export const hook522 = {
         "A",
       ],
       [
-        "Dive forward 0° to 30° Keeping course",
+        "Dive forward 0° to 30° / Keeping course",
         "A",
-        "Dive forward 0° to 30° Keeping course",
+        "Dive forward 0° to 30° / Keeping course",
         "A",
       ],
       ["No", "A", "No", "A"],
@@ -134,12 +150,15 @@ export const hook522 = {
   },
   "c12": {
     "result": "A",
-    "tests": [[
-      "Spontaneous in less than 3 s",
-      "A",
-      "Spontaneous in less than 3 s",
-      "A",
-    ], ["No", "A", "No", "A"]],
+    "tests": [
+      [
+        "Spontaneous in less than 3 s",
+        "A",
+        "Spontaneous in less than 3 s",
+        "A",
+      ],
+      ["No", "A", "No", "A"],
+    ],
   },
   "c13": {
     "result": "A",
@@ -157,7 +176,7 @@ export const hook522 = {
       [
         "Less than 90° / Dive or roll angle 0° to 15°",
         "A",
-        "Less than 90° / Dive or roll angle A 0° to 15°",
+        "Less than 90° / Dive or roll angle 0° to 15°",
         "A",
       ],
       ["Spontaneous re-inflation", "A", "Spontaneous re-inflation", "A"],
@@ -189,7 +208,7 @@ export const hook522 = {
       [
         "Less than 90° / Dive or roll angle 0° to 15°",
         "A",
-        "Less than 90° / Dive or roll angle 0° to 15°",
+        "Less than 90° / Dive or roll angle 15° to 45°",
         "A",
       ],
       ["Spontaneous re-inflation", "A", "Spontaneous re-inflation", "A"],
@@ -222,23 +241,40 @@ export const hook522 = {
   },
   "c15": {
     "result": "A",
-    "tests": [["Yes", "A", "Yes", "A"], ["Yes", "A", "Yes", "A"], [
-      "More than 50 % of the symmetric control travel",
-      "A",
-      "More than 50 % of the symmetric control travel",
-      "A",
-    ]],
+    "tests": [
+      ["Yes", "A", "Yes", "A"],
+      ["Yes", "A", "Yes", "A"],
+      [
+        "More than 50 % of the symmetric control travel",
+        "A",
+        "More than 50 % of the symmetric control travel",
+        "A",
+      ],
+    ],
   },
-  "c16": { "result": "A", "tests": [["No", "A", "No", "A"]] },
-  "c17": { "result": "A", "tests": [["No", "A", "No", "A"]] },
+  "c16": {
+    "result": "A",
+    "tests": [
+      ["No", "A", "No", "A"],
+    ],
+  },
+  "c17": {
+    "result": "A",
+    "tests": [
+      ["No", "A", "No", "A"],
+    ],
+  },
   "c18": {
     "result": "A",
-    "tests": [[
-      "Stops spinning in less than 90°",
-      "A",
-      "Stops spinning in less than 90°",
-      "A",
-    ], ["No", "A", "No", "A"]],
+    "tests": [
+      [
+        "Stops spinning in less than 90°",
+        "A",
+        "Stops spinning in less than 90°",
+        "A",
+      ],
+      ["No", "A", "No", "A"],
+    ],
   },
   "c19": {
     "result": "A",
@@ -287,7 +323,7 @@ export const hook522 = {
       [
         "Spontaneous in less than 3 s",
         "A",
-        "Recovery through pilot action in B less than a further 3 s",
+        "Recovery through pilot action in less than a further 3 s",
         "B",
       ],
       ["Dive forward 0° to 30°", "A", "Dive forward 0° to 30°", "A"],
@@ -296,16 +332,18 @@ export const hook522 = {
   },
   "c22": {
     "result": "A",
-    "tests": [["Yes", "A", "Yes", "A"], ["No", "A", "No", "A"]],
+    "tests": [
+      ["Yes", "A", "Yes", "A"],
+      ["No", "A", "No", "A"],
+    ],
   },
   "c23": {
     "result": "0",
-    "tests": [["not available", "0", "not available", "0"], [
-      "not available",
-      "0",
-      "not available",
-      "0",
-    ], ["not available", "0", "not available", "0"]],
+    "tests": [
+      ["not available", "0", "not available", "0"],
+      ["not available", "0", "not available", "0"],
+      ["not available", "0", "not available", "0"],
+    ],
   },
   "classification": "B",
   "folding_lines_used": "no",

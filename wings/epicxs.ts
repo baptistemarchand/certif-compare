@@ -1,22 +1,29 @@
 export const epicxs = {
   "c01": {
     "result": "A",
-    "tests": [[
-      "Smooth, easy and constant rising",
-      "A",
-      "Smooth, easy and constant rising",
-      "A",
-    ], ["No", "A", "No", "A"]],
+    "tests": [
+      [
+        "Smooth, easy and constant rising",
+        "A",
+        "Smooth, easy and constant rising",
+        "A",
+      ],
+      ["No", "A", "No", "A"],
+    ],
   },
-  "c02": { "result": "A", "tests": [["No", "A", "No", "A"]] },
+  "c02": {
+    "result": "A",
+    "tests": [
+      ["No", "A", "No", "A"],
+    ],
+  },
   "c03": {
     "result": "A",
-    "tests": [["Yes", "A", "Yes", "A"], ["Yes", "A", "Yes", "A"], [
-      "Less than 25 km/h",
-      "A",
-      "Less than 25 km/h",
-      "A",
-    ]],
+    "tests": [
+      ["Yes", "A", "Yes", "A"],
+      ["Yes", "A", "Yes", "A"],
+      ["Less than 25 km/h", "A", "Less than 25 km/h", "A"],
+    ],
   },
   "c04": {
     "result": "A",
@@ -33,18 +40,28 @@ export const epicxs = {
   },
   "c05": {
     "result": "A",
-    "tests": [[
-      "Dive forward less than 30°",
-      "A",
-      "Dive forward less than 30°",
-      "A",
-    ], ["No", "A", "No", "A"]],
+    "tests": [
+      ["Dive forward less than 30°", "A", "Dive forward less than 30°", "A"],
+      ["No", "A", "No", "A"],
+    ],
   },
-  "c06": { "result": "A", "tests": [["No", "A", "No", "A"]] },
-  "c07": { "result": "A", "tests": [["Reducing", "A", "Reducing", "A"]] },
+  "c06": {
+    "result": "A",
+    "tests": [
+      ["No", "A", "No", "A"],
+    ],
+  },
+  "c07": {
+    "result": "A",
+    "tests": [
+      ["Reducing", "A", "Reducing", "A"],
+    ],
+  },
   "c08": {
     "result": "A",
-    "tests": [["Spontaneous exit", "A", "Spontaneous exit", "A"]],
+    "tests": [
+      ["Spontaneous exit", "A", "Spontaneous exit", "A"],
+    ],
   },
   "c09": {
     "result": "A",
@@ -55,7 +72,12 @@ export const epicxs = {
         "Immediate reduction of rate of turn",
         "A",
       ],
-      ["Spontaneous exit", "A", "Spontaneous exit", "A"],
+      [
+        "Spontaneous exit (g force decreasing, rate of turn decreasing)",
+        "A",
+        "Spontaneous exit (g force decreasing, rate of turn decreasing)",
+        "A",
+      ],
       [
         "Less than 720°, spontaneous recovery",
         "A",
@@ -75,23 +97,9 @@ export const epicxs = {
         "A",
       ],
       [
-        "Dive forward 0° to 30° Keeping",
+        "Dive forward 0° to 30° Keeping course",
         "A",
-        "Dive forward 0° to 30° Keeping\ncourse",
-        "A",
-      ],
-      ["No", "A", "No", "A"],
-      ["Rocking back less than 45°", "A", "Rocking back less than 45°", "A"],
-      [
-        "Spontaneous in less than 3 s",
-        "A",
-        "Spontaneous in less than 3 s",
-        "A",
-      ],
-      [
-        "Dive forward 0° to 30° / Keeping",
-        "A",
-        "Dive forward 0° to 30° / Keeping\ncourse",
+        "Dive forward 0° to 30° Keeping course",
         "A",
       ],
       ["No", "A", "No", "A"],
@@ -103,9 +111,23 @@ export const epicxs = {
         "A",
       ],
       [
-        "Dive forward 0° to 30° / Keeping",
+        "Dive forward 0° to 30° / Keeping course",
         "A",
-        "Dive forward 0° to 30° / Keeping\ncourse",
+        "Dive forward 0° to 30° / Keeping course",
+        "A",
+      ],
+      ["No", "A", "No", "A"],
+      ["Rocking back less than 45°", "A", "Rocking back less than 45°", "A"],
+      [
+        "Spontaneous in less than 3 s",
+        "A",
+        "Spontaneous in less than 3 s",
+        "A",
+      ],
+      [
+        "Dive forward 0° to 30° / Keeping course",
+        "A",
+        "Dive forward 0° to 30° / Keeping course",
         "A",
       ],
       ["No", "A", "No", "A"],
@@ -133,12 +155,15 @@ export const epicxs = {
   },
   "c12": {
     "result": "A",
-    "tests": [[
-      "Spontaneous in less than 3 s",
-      "A",
-      "Spontaneous in less than 3 s",
-      "A",
-    ], ["No", "A", "No", "A"]],
+    "tests": [
+      [
+        "Spontaneous in less than 3 s",
+        "A",
+        "Spontaneous in less than 3 s",
+        "A",
+      ],
+      ["No", "A", "No", "A"],
+    ],
   },
   "c13": {
     "result": "A",
@@ -156,21 +181,21 @@ export const epicxs = {
       [
         "Less than 90° / Dive or roll angle 0° to 15°",
         "A",
-        "Less than 90° / Dive or roll angle 0° to 15°",
+        "Less than 90° / Dive or roll angle 15° to 45°",
         "A",
       ],
       ["Spontaneous re-inflation", "A", "Spontaneous re-inflation", "A"],
       ["Less than 360°", "A", "Less than 360°", "A"],
       [
-        "No (or only a small number of collapsed cells with a collapsed cells with a spontaneous spontaneous reinflation)",
+        "No (or only a small number of collapsed cells with a spontaneous reinflation)",
         "A",
-        "No (or only a small number of collapsed cells with a collapsed cells with a spontaneous spontaneous reinflation)",
+        "No (or only a small number of collapsed cells with a spontaneous reinflation)",
         "A",
       ],
       ["No", "A", "No", "A"],
       ["No", "A", "No", "A"],
       [
-        "Less than 90° / Dive or roll angle 0° to 15°",
+        "Less than 90° / Dive or roll angle 15° to 45°",
         "A",
         "90° to 180° / Dive or roll angle 15° to 45°",
         "B",
@@ -178,9 +203,9 @@ export const epicxs = {
       ["Spontaneous re-inflation", "A", "Spontaneous re-inflation", "A"],
       ["Less than 360°", "A", "Less than 360°", "A"],
       [
-        "No (or only a small number of collapsed cells with a collapsed cells with a spontaneous spontaneous reinflation)",
+        "No (or only a small number of collapsed cells with a spontaneous reinflation)",
         "A",
-        "No (or only a small number of collapsed cells with a collapsed cells with a spontaneous spontaneous reinflation)",
+        "No (or only a small number of collapsed cells with a spontaneous reinflation)",
         "A",
       ],
       ["No", "A", "No", "A"],
@@ -188,21 +213,21 @@ export const epicxs = {
       [
         "Less than 90° / Dive or roll angle 0° to 15°",
         "A",
-        "Less than 90° / Dive or roll angle 0° to 15°",
+        "Less than 90° / Dive or roll angle 15° to 45°",
         "A",
       ],
       ["Spontaneous re-inflation", "A", "Spontaneous re-inflation", "A"],
       ["Less than 360°", "A", "Less than 360°", "A"],
       [
-        "No (or only a small number of collapsed cells with a collapsed cells with a spontaneous spontaneous reinflation)",
+        "No (or only a small number of collapsed cells with a spontaneous reinflation)",
         "A",
-        "No (or only a small number of collapsed cells with a collapsed cells with a spontaneous spontaneous reinflation)",
+        "No (or only a small number of collapsed cells with a spontaneous reinflation)",
         "A",
       ],
       ["No", "A", "No", "A"],
       ["No", "A", "No", "A"],
       [
-        "Less than 90° / Dive or roll angle 0° to 15°",
+        "Less than 90° / Dive or roll angle 15° to 45°",
         "A",
         "90° to 180° / Dive or roll angle 15° to 45°",
         "B",
@@ -210,9 +235,9 @@ export const epicxs = {
       ["Spontaneous re-inflation", "A", "Spontaneous re-inflation", "A"],
       ["Less than 360°", "A", "Less than 360°", "A"],
       [
-        "No (or only a small number of collapsed cells with a collapsed cells with a spontaneous spontaneous reinflation)",
+        "No (or only a small number of collapsed cells with a spontaneous reinflation)",
         "A",
-        "No (or only a small number of collapsed cells with a collapsed cells with a spontaneous spontaneous reinflation)",
+        "No (or only a small number of collapsed cells with a spontaneous reinflation)",
         "A",
       ],
       ["No", "A", "No", "A"],
@@ -221,23 +246,40 @@ export const epicxs = {
   },
   "c15": {
     "result": "A",
-    "tests": [["Yes", "A", "Yes", "A"], ["Yes", "A", "Yes", "A"], [
-      "More than 50 % of the symmetric control travel",
-      "A",
-      "More than 50 % of the symmetric control travel",
-      "A",
-    ]],
+    "tests": [
+      ["Yes", "A", "Yes", "A"],
+      ["Yes", "A", "Yes", "A"],
+      [
+        "More than 50 % of the symmetric control travel",
+        "A",
+        "More than 50 % of the symmetric control travel",
+        "A",
+      ],
+    ],
   },
-  "c16": { "result": "A", "tests": [["No", "A", "No", "A"]] },
-  "c17": { "result": "A", "tests": [["No", "A", "No", "A"]] },
+  "c16": {
+    "result": "A",
+    "tests": [
+      ["No", "A", "No", "A"],
+    ],
+  },
+  "c17": {
+    "result": "A",
+    "tests": [
+      ["No", "A", "No", "A"],
+    ],
+  },
   "c18": {
     "result": "A",
-    "tests": [[
-      "Stops spinning in less than 90°",
-      "A",
-      "Stops spinning in less than 90°",
-      "A",
-    ], ["No", "A", "No", "A"]],
+    "tests": [
+      [
+        "Stops spinning in less than 90°",
+        "A",
+        "Stops spinning in less than 90°",
+        "A",
+      ],
+      ["No", "A", "No", "A"],
+    ],
   },
   "c19": {
     "result": "A",
@@ -295,16 +337,18 @@ export const epicxs = {
   },
   "c22": {
     "result": "A",
-    "tests": [["Yes", "A", "Yes", "A"], ["No", "A", "No", "A"]],
+    "tests": [
+      ["Yes", "A", "Yes", "A"],
+      ["No", "A", "No", "A"],
+    ],
   },
   "c23": {
     "result": "0",
-    "tests": [["not available", "0", "not available", "0"], [
-      "not available",
-      "0",
-      "not available",
-      "0",
-    ], ["not available", "0", "not available", "0"]],
+    "tests": [
+      ["not available", "0", "not available", "0"],
+      ["not available", "0", "not available", "0"],
+      ["not available", "0", "not available", "0"],
+    ],
   },
   "classification": "B",
   "folding_lines_used": "no",

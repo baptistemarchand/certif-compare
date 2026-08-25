@@ -1,46 +1,62 @@
 export const lynx2s = {
   "c01": {
     "result": "B",
-    "tests": [[
-      "Easy rising, some pilot correction is required",
-      "B",
-      "Easy rising, some pilot correction is required",
-      "B",
-    ], ["No", "A", "No", "A"]],
+    "tests": [
+      [
+        "Easy rising, some pilot correction is required",
+        "B",
+        "Easy rising, some pilot correction is required",
+        "B",
+      ],
+      ["No", "A", "No", "A"],
+    ],
   },
-  "c02": { "result": "A", "tests": [["No", "A", "No", "A"]] },
+  "c02": {
+    "result": "A",
+    "tests": [
+      ["No", "A", "No", "A"],
+    ],
+  },
   "c03": {
     "result": "B",
-    "tests": [["Yes", "A", "Yes", "A"], ["Yes", "A", "Yes", "A"], [
-      "Less than 25 km/h",
-      "A",
-      "25 km/h to 30 km/h",
-      "B",
-    ]],
+    "tests": [
+      ["Yes", "A", "Yes", "A"],
+      ["Yes", "A", "Yes", "A"],
+      ["Less than 25 km/h", "A", "25 km/h to 30 km/h", "B"],
+    ],
   },
   "c04": {
     "result": "C",
-    "tests": [["Increasing / 40 cm to 55 cm", "C", "not available", "0"], [
-      "not available",
-      "0",
-      "Increasing / 45 cm to 60 cm",
-      "C",
-    ], ["not available", "0", "not available", "0"]],
+    "tests": [
+      ["Increasing / 40 cm to 55 cm", "C", "not available", "0"],
+      ["not available", "0", "Increasing / 45 cm to 60 cm", "C"],
+      ["not available", "0", "not available", "0"],
+    ],
   },
   "c05": {
     "result": "A",
-    "tests": [[
-      "Dive forward less than 30°",
-      "A",
-      "Dive forward less than 30°",
-      "A",
-    ], ["No", "A", "No", "A"]],
+    "tests": [
+      ["Dive forward less than 30°", "A", "Dive forward less than 30°", "A"],
+      ["No", "A", "No", "A"],
+    ],
   },
-  "c06": { "result": "A", "tests": [["No", "A", "No", "A"]] },
-  "c07": { "result": "A", "tests": [["Reducing", "A", "Reducing", "A"]] },
+  "c06": {
+    "result": "A",
+    "tests": [
+      ["No", "A", "No", "A"],
+    ],
+  },
+  "c07": {
+    "result": "A",
+    "tests": [
+      ["Reducing", "A", "Reducing", "A"],
+    ],
+  },
   "c08": {
     "result": "A",
-    "tests": [["Spontaneous exit", "A", "Spontaneous exit", "A"]],
+    "tests": [
+      ["Spontaneous exit", "A", "Spontaneous exit", "A"],
+    ],
   },
   "c09": {
     "result": "A",
@@ -51,7 +67,12 @@ export const lynx2s = {
         "Immediate reduction of rate of turn",
         "A",
       ],
-      ["Spontaneous exit", "A", "Spontaneous exit", "A"],
+      [
+        "Spontaneous exit (g force decreasing, rate of turn decreasing)",
+        "A",
+        "Spontaneous exit (g force decreasing, rate of turn decreasing)",
+        "A",
+      ],
       [
         "Less than 720°, spontaneous recovery",
         "A",
@@ -119,12 +140,15 @@ export const lynx2s = {
   },
   "c12": {
     "result": "A",
-    "tests": [[
-      "Spontaneous in less than 3 s",
-      "A",
-      "Spontaneous in less than 3 s",
-      "A",
-    ], ["No", "A", "No", "A"]],
+    "tests": [
+      [
+        "Spontaneous in less than 3 s",
+        "A",
+        "Spontaneous in less than 3 s",
+        "A",
+      ],
+      ["No", "A", "No", "A"],
+    ],
   },
   "c13": {
     "result": "A",
@@ -142,7 +166,7 @@ export const lynx2s = {
       [
         "Less than 90° / Dive or roll angle 0° to 15°",
         "A",
-        "Less than 90° / Dive or roll angle 0° to 15°",
+        "Less than 90° / Dive or roll angle 15° to 45°",
         "A",
       ],
       ["Spontaneous re-inflation", "A", "Spontaneous re-inflation", "A"],
@@ -158,7 +182,7 @@ export const lynx2s = {
       [
         "Less than 90° / Dive or roll angle 15° to 45°",
         "A",
-        "90° to 180° / Dive or roll angle B 15° to 45°",
+        "90° to 180° / Dive or roll angle 15° to 45°",
         "B",
       ],
       ["Spontaneous re-inflation", "A", "Spontaneous re-inflation", "A"],
@@ -174,7 +198,7 @@ export const lynx2s = {
       [
         "90° to 180° / Dive or roll angle 15° to 45°",
         "B",
-        "Less than 90° / Dive or roll angle A 15° to 45°",
+        "Less than 90° / Dive or roll angle 15° to 45°",
         "A",
       ],
       ["Spontaneous re-inflation", "A", "Spontaneous re-inflation", "A"],
@@ -207,23 +231,40 @@ export const lynx2s = {
   },
   "c15": {
     "result": "A",
-    "tests": [["Yes", "A", "Yes", "A"], ["Yes", "A", "Yes", "A"], [
-      "More than 50 % of the symmetric control travel",
-      "A",
-      "More than 50 % of the symmetric control travel",
-      "A",
-    ]],
+    "tests": [
+      ["Yes", "A", "Yes", "A"],
+      ["Yes", "A", "Yes", "A"],
+      [
+        "More than 50 % of the symmetric control travel",
+        "A",
+        "More than 50 % of the symmetric control travel",
+        "A",
+      ],
+    ],
   },
-  "c16": { "result": "A", "tests": [["No", "A", "No", "A"]] },
-  "c17": { "result": "A", "tests": [["No", "A", "No", "A"]] },
+  "c16": {
+    "result": "A",
+    "tests": [
+      ["No", "A", "No", "A"],
+    ],
+  },
+  "c17": {
+    "result": "A",
+    "tests": [
+      ["No", "A", "No", "A"],
+    ],
+  },
   "c18": {
     "result": "A",
-    "tests": [[
-      "Stops spinning in less than 90°",
-      "A",
-      "Stops spinning in less than 90°",
-      "A",
-    ], ["No", "A", "No", "A"]],
+    "tests": [
+      [
+        "Stops spinning in less than 90°",
+        "A",
+        "Stops spinning in less than 90°",
+        "A",
+      ],
+      ["No", "A", "No", "A"],
+    ],
   },
   "c19": {
     "result": "0",
@@ -266,7 +307,10 @@ export const lynx2s = {
   },
   "c22": {
     "result": "A",
-    "tests": [["Yes", "A", "Yes", "A"], ["No", "A", "No", "A"]],
+    "tests": [
+      ["Yes", "A", "Yes", "A"],
+      ["No", "A", "No", "A"],
+    ],
   },
   "c23": {
     "result": "0",
