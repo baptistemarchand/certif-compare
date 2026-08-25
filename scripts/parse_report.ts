@@ -1,4 +1,9 @@
-import { detectColumns, type Run } from "./pdf_text.ts";
+import {
+  columnOf,
+  type ColumnRange,
+  detectColumns,
+  type Run,
+} from "./pdf_text.ts";
 import type { CategoryKey } from "../categories.ts";
 import type { TestResult } from "../components/Test.tsx";
 
@@ -15,24 +20,26 @@ export interface Category {
 }
 
 /**
- * Vertical geometry of the report, constant across every template revision:
- * consecutive table rows are 12.848pt apart, while a cell that wraps onto a
- * second visual line sits 8.848pt below its own first line. Anything at or
- * above the midpoint starts a new row.
- *
- * This gap — not the presence of a grade — is what delimits rows. The
- * "Folding lines used" rows carry a label and comments but no grades, so a
- * grade-based rule silently glues them onto the preceding "Cascade occurs" row
- * (yielding "No No") *without* changing any per-category test count, which
- * makes the corruption invisible to the count check.
+ * A cell that wraps onto a second visual line sits 8.848pt below its own first
+ * line on every template revision seen so far, while the tightest gap between
+ * two different rows is 12.848pt. Anything above the midpoint starts a new row.
  */
-const ROW_PITCH = 12.848;
-const WRAP_LEADING = 8.848;
-const NEW_ROW_GAP = (ROW_PITCH + WRAP_LEADING) / 2;
+const WRAP_GAP = 10.5;
 
-const BODY_SIZE = 8;
-const HEADER_SIZE = 10;
-const COLUMN_TOLERANCE = 1;
+/**
+ * How far above its row's label a cell may sit. The 2025 template centres a
+ * row's text vertically against its label rather than sharing a baseline, so
+ * the first line of a comment can start ~1.7pt higher than the label itself.
+ */
+const ROW_TOP_SLACK = 3;
+
+/** Category headings and their grade are likewise not quite on one baseline. */
+const HEADING_SLACK = 3;
+
+/** Excludes the page footer, which is the only small text outside the table. */
+const FOOTER_TOP = 35;
+/** Excludes the cover-page header block (10pt) and the title (14pt). */
+const MAX_TABLE_SIZE = 9;
 
 /** Present in the PDF for c10/c14 but deliberately absent from categories.ts. */
 const SKIPPED_ROW = /^folding lines used/i;
@@ -40,84 +47,197 @@ const SKIPPED_ROW = /^folding lines used/i;
 const LAST_CATEGORY = 23;
 const CATEGORY_HEADING = /^(\d+)\.\s/;
 
-type Column =
-  | "label"
-  | "lightComment"
-  | "lightGrade"
-  | "heavyComment"
-  | "heavyGrade";
-const COLUMN_ORDER: Column[] = [
-  "label",
-  "lightComment",
-  "lightGrade",
-  "heavyComment",
-  "heavyGrade",
-];
-
-interface Line {
-  page: number;
-  y: number;
-  cells: Partial<Record<Column, { bold: boolean; text: string }>>;
-}
-
-/** Groups runs into visual lines, ordered top-down. */
-function toLines(runs: Run[], columns: number[]): Line[] {
-  const snap = (x: number): Column | undefined => {
-    for (let i = 0; i < columns.length; i++) {
-      if (Math.abs(x - columns[i]) < COLUMN_TOLERANCE) return COLUMN_ORDER[i];
-    }
-    return undefined;
-  };
-
-  // Runs sharing a y are *not* contiguous in the content stream — a wrapped
-  // continuation at a lower y is emitted between them — so lines are keyed by
-  // (page, y) across the whole page rather than compared against the last run.
-  const byKey = new Map<string, Line>();
-  for (const run of runs) {
-    if (Math.abs(run.size - BODY_SIZE) > 0.5) continue;
-    const column = snap(run.x);
-    if (!column) continue;
-    const key = `${run.page}:${run.y.toFixed(2)}`;
-    let line = byKey.get(key);
-    if (!line) {
-      line = { page: run.page, y: run.y, cells: {} };
-      byKey.set(key, line);
-    }
-    const cell = line.cells[column];
-    line.cells[column] = {
-      bold: cell?.bold ?? run.bold,
-      text: cell ? `${cell.text} ${run.text}` : run.text,
-    };
-  }
-
-  return [...byKey.values()].sort((a, b) => a.page - b.page || b.y - a.y);
-}
+const LABEL = 0;
+const DATA_COLUMNS = [1, 2, 3, 4];
 
 const clean = (text: string) => text.replace(/\s+/g, " ").trim();
 
-/** Reads the two label/value column pairs of the cover-page header block. */
-function parseHeader(runs: Run[]): Record<string, string> {
-  const columns = detectColumns(runs, HEADER_SIZE, 4);
-  const byY = new Map<number, Map<number, string>>();
-  for (const run of runs) {
-    if (run.page !== 1) continue;
-    if (Math.abs(run.size - HEADER_SIZE) > 0.5) continue;
-    const index = columns.findIndex((c) =>
-      Math.abs(run.x - c) < COLUMN_TOLERANCE
+const isTableRun = (run: Run) =>
+  run.y > FOOTER_TOP && run.size < MAX_TABLE_SIZE;
+
+interface Row {
+  /** Top of the row: where its cells start, and what anchors them. */
+  y: number;
+  /** Baseline of the label's last line, for folding in further wrapped lines. */
+  labelY: number;
+  label: string;
+  cells: string[][];
+}
+
+/**
+ * Builds the table by anchoring every row on its label.
+ *
+ * Rows cannot be delimited by "has both grades": the `Folding lines used` rows
+ * carry a label and comments but no grades, so such a rule silently glues them
+ * onto the preceding `Cascade occurs` row *without* changing any per-category
+ * test count — invisible to the count check. Anchoring on the label instead
+ * gives those rows an identity of their own, so they can be dropped by name.
+ */
+function buildRows(runs: Run[], columns: ColumnRange[]): {
+  categories: Record<string, Category>;
+} {
+  const categories: Record<string, Category> = {};
+  let tests: TestResult[] | undefined;
+  let done = false;
+
+  const pages = [...new Set(runs.map((r) => r.page))].sort((a, b) => a - b);
+  for (const page of pages) {
+    if (done) break;
+    const onPage = runs
+      .filter((run) => run.page === page && isTableRun(run))
+      .map((run) => ({ run, column: columnOf(columns, run) }))
+      .filter((entry) => entry.column >= 0)
+      .sort((a, b) => b.run.y - a.run.y || a.run.x - b.run.x);
+
+    // Headings first: they close the current category and must never be
+    // mistaken for a row label.
+    const headings = new Map<number, { number: number; result: string }>();
+    const subHeadings = new Set<number>();
+    for (const { run, column } of onPage) {
+      if (column !== LABEL || !run.bold) continue;
+      const match = CATEGORY_HEADING.exec(run.text);
+      if (!match) {
+        subHeadings.add(run.y);
+        continue;
+      }
+      const grade = onPage.find((e) =>
+        e.column === 1 && e.run.bold &&
+        Math.abs(e.run.y - run.y) <= HEADING_SLACK
+      );
+      if (!grade) {
+        subHeadings.add(run.y);
+        continue;
+      }
+      headings.set(run.y, {
+        number: Number(match[1]),
+        result: clean(grade.run.text),
+      });
+    }
+
+    // Row anchors: non-bold label runs, with wrapped label lines folded in.
+    const rows: Row[] = [];
+    for (const { run, column } of onPage) {
+      if (column !== LABEL || run.bold) continue;
+      const previous = rows.at(-1);
+      if (previous && previous.labelY - run.y <= WRAP_GAP) {
+        previous.label += ` ${run.text}`;
+        previous.labelY = run.y;
+        continue;
+      }
+      rows.push({
+        y: run.y,
+        labelY: run.y,
+        label: run.text,
+        cells: [[], [], [], []],
+      });
+    }
+
+    // Every element of the page in one top-down order, so a heading closes the
+    // rows above it and opens the ones below.
+    const anchors = [
+      ...rows.map((row, index) => ({ y: row.y, row, index })),
+    ].sort((a, b) => b.y - a.y);
+
+    const rowFor = (y: number): Row | undefined => {
+      // The lowest anchor still at or above this run — not the nearest one,
+      // which would hand the third line of a wrapped cell to the row below.
+      let best: Row | undefined;
+      for (const anchor of anchors) {
+        if (anchor.row.y >= y - ROW_TOP_SLACK) best = anchor.row;
+        else break;
+      }
+      return best;
+    };
+
+    for (const { run, column } of onPage) {
+      if (column === LABEL || run.bold) continue;
+      const row = rowFor(run.y);
+      if (row) row.cells[DATA_COLUMNS.indexOf(column)].push(run.text);
+    }
+
+    // Walk headings and rows together in page order.
+    const events = [
+      ...[...headings.entries()].map(([y, h]) => ({
+        y,
+        heading: h,
+        row: undefined as Row | undefined,
+      })),
+      ...rows.map((row) => ({ y: row.y, heading: undefined, row })),
+    ].sort((a, b) => b.y - a.y);
+
+    for (const event of events) {
+      if (event.heading) {
+        if (event.heading.number > LAST_CATEGORY) {
+          done = true;
+          break;
+        }
+        tests = [];
+        categories[`c${String(event.heading.number).padStart(2, "0")}`] = {
+          result: event.heading.result,
+          tests,
+        };
+      } else if (event.row && tests) {
+        if (SKIPPED_ROW.test(clean(event.row.label))) continue;
+        tests.push(
+          event.row.cells.map((cell) => clean(cell.join(" "))) as TestResult,
+        );
+      }
+    }
+  }
+
+  return { categories };
+}
+
+const HEADER_SIZE = 10;
+/** Second-column header label; also the divider between the two label/value pairs. */
+const DIVIDER_LABEL = "Classification";
+
+/**
+ * Reads named fields out of the cover-page header block.
+ *
+ * The block is a two-by-two label/value grid, but it resists the column
+ * clustering used for the table: the 2025 template renders units as separate
+ * runs ("Harness to risers distance", "[", "cm", "]"), which invent extra
+ * columns of their own and crowd out the real ones. Since only three fields are
+ * ever needed, each is instead found by name and its value read from the runs
+ * to its right — bounded by the second label column, whose position is given by
+ * "Classification" itself.
+ */
+function parseHeader(runs: Run[], names: string[]): Record<string, string> {
+  const headerRuns = runs.filter(
+    (run) => run.page === 1 && Math.abs(run.size - HEADER_SIZE) < 0.6,
+  );
+
+  const rows: Run[][] = [];
+  for (const run of headerRuns.sort((a, b) => b.y - a.y || a.x - b.x)) {
+    const last = rows.at(-1);
+    if (last && Math.abs(last[0].y - run.y) <= 2) last.push(run);
+    else rows.push([run]);
+  }
+
+  const divider = headerRuns.find((run) => clean(run.text) === DIVIDER_LABEL);
+  if (!divider) {
+    throw new Error(
+      `header label ${
+        JSON.stringify(DIVIDER_LABEL)
+      } not found — is this an Air Turquoise report?`,
     );
-    if (index < 0) continue;
-    const row = byY.get(run.y) ?? new Map<number, string>();
-    const existing = row.get(index);
-    row.set(index, existing ? `${existing} ${run.text}` : run.text);
-    byY.set(run.y, row);
   }
 
   const fields: Record<string, string> = {};
-  for (const row of byY.values()) {
-    for (const [labelIndex, valueIndex] of [[0, 1], [2, 3]]) {
-      const label = row.get(labelIndex);
-      const value = row.get(valueIndex);
-      if (label && value) fields[clean(label)] = clean(value);
+  for (const row of rows) {
+    for (const label of row) {
+      const name = clean(label.text);
+      if (!names.includes(name)) continue;
+      const inLeftColumn = label.x < divider.x - 1;
+      const value = row
+        .filter((run) =>
+          run.x > label.x && (!inLeftColumn || run.x < divider.x - 1)
+        )
+        .sort((a, b) => a.x - b.x)
+        .map((run) => run.text)
+        .join(" ");
+      if (clean(value)) fields[name] = clean(value);
     }
   }
   return fields;
@@ -136,69 +256,13 @@ function requireField(fields: Record<string, string>, name: string): string {
 }
 
 export function parseReport(runs: Run[]): Wing {
-  const columns = detectColumns(runs, BODY_SIZE, 5);
-  const lines = toLines(runs, columns);
-
-  const categories: Record<string, Category> = {};
-  let tests: TestResult[] = [];
-  let labels: string[] = [];
-  let open: { label: string; cells: string[] } | undefined;
-  let previous: Line | undefined;
-
-  const closeRow = () => {
-    if (!open) return;
-    const label = clean(open.label);
-    if (!SKIPPED_ROW.test(label)) {
-      tests.push(open.cells.map(clean) as TestResult);
-      labels.push(label);
-    }
-    open = undefined;
-  };
-
-  for (const line of lines) {
-    const { cells } = line;
-    const label = cells.label;
-    const heading = label?.bold ? CATEGORY_HEADING.exec(label.text) : null;
-
-    if (heading && cells.lightComment?.bold) {
-      closeRow();
-      const number = Number(heading[1]);
-      if (number > LAST_CATEGORY) break;
-      tests = [];
-      labels = [];
-      categories[`c${String(number).padStart(2, "0")}`] = {
-        result: clean(cells.lightComment.text),
-        tests,
-      };
-    } else if (label?.bold) {
-      // Configuration sub-heading ("At least 50% chord") or the wrapped second
-      // line of a category title — a separator, never data.
-      closeRow();
-    } else {
-      const gap = previous && previous.page === line.page
-        ? previous.y - line.y
-        : Infinity;
-      if (!open || gap >= NEW_ROW_GAP) {
-        closeRow();
-        open = { label: "", cells: ["", "", "", ""] };
-      }
-      open.label = `${open.label} ${label?.text ?? ""}`;
-      const parts: Column[] = [
-        "lightComment",
-        "lightGrade",
-        "heavyComment",
-        "heavyGrade",
-      ];
-      parts.forEach((part, i) => {
-        const cell = cells[part];
-        if (cell) open!.cells[i] = `${open!.cells[i]} ${cell.text}`;
-      });
-    }
-    previous = line;
-  }
-  closeRow();
-
-  const header = parseHeader(runs);
+  const columns = detectColumns(runs.filter(isTableRun), 5);
+  const { categories } = buildRows(runs, columns);
+  const header = parseHeader(runs, [
+    "Classification",
+    "Folding lines used",
+    "Glider model",
+  ]);
   return {
     ...categories,
     classification: requireField(header, "Classification"),

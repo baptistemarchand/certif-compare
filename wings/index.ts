@@ -3,6 +3,7 @@ import { epicxs } from "./epicxs.ts";
 import { hook522 } from "./hook522.ts";
 import { lynx2s } from "./lynx2s.ts";
 import { soarxs } from "./soarxs.ts";
+import { tigram } from "./tigram.ts";
 
 export const allWings = [
   hook522,
@@ -10,4 +11,5 @@ export const allWings = [
   soarxs,
   lynx2s,
   epicxs,
+  tigram,
 ];
